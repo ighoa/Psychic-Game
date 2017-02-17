@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Psychic-game</title>
+</head>
+<body>
+
+<!--Guess what letter I'm thinking of
+Wins: (# of times the user has guessed the letter correctly)
+Losses: (# of times the user has failed to guess the letter correctly after exhausting all guesses)
+Guesses Left: (# of guesses left. This will update)
+Your Guesses So Far: (the specific letters that the user typed. Display these until the user either wins or loses.)
+When the player wins, increase the Wins counter and start the game over again (without refreshing the page).
+When the player loses, increase the Losses counter and restart the game without a page refresh (just like when the user wins).-->
+<h1>The Psychic Game</h1>
+
+<p>Guess what letter I'm thinking of</p>
+
+<p>Wins:<span id="win">0</span></p>
+
+<p>Losses:<span id="loss">0</span></p>
+
+<p>Guesses Left:<span id="guess-left">9</span></p>
+
+<p>Your Guesses so far:<span id="guesses-sofar"></span></p>
+
+
+
+<script type="text/javascript">
+
+var letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]; 
+
+	
+	var wins = 0;
+    
+	var losses = 0;
+	var guessesLeft = 9;
+	var guessesSoFar= []
+
+	var computerGuess = letters[Math.floor(Math.random()*letters.length)];
+		console.log("The computer guessed " + computerGuess);
+
+	document.onkeyup = function() {
+		var userguess = String.fromCharCode(event.keyCode).toLowerCase();
+
+		console.log("The user guessed " + userguess);
+
+	if (userguess===computerGuess) { wins++;
+	document.getElementById("win").innerHTML = wins;
+	}
+	else {losses++; guessesLeft--; guessesSoFar.push(userguess);
+		document.getElementById("loss").innerHTML = losses;
+		document.getElementById("guess-left").innerHTML = guessesLeft;
+		document.getElementById("guesses-sofar").innerHTML = guessesSoFar;
+	}
+	
+		console.log("loss"+losses);
+		console.log("win"+wins);
+		console.log("guesses-sofar"+guessesSoFar);
+	if (wins===9 || losses===9) { 
+		wins=0;
+		losses=0;
+		guessesLeft=9;
+		guessesSoFar=[]
+		document.getElementById("win").innerHTML = wins;
+		document.getElementById("loss").innerHTML = losses;
+		document.getElementById("guess-left").innerHTML = guessesLeft;
+		document.getElementById("guesses-sofar").innerHTML = guessesSoFar;
+	} 
+	}
+
+
+
+</script>
+</body>
+</html>
